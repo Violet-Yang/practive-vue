@@ -1,30 +1,16 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <layout> </layout>
   <router-view />
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script setup>
+import { getCurrentInstance, provide } from "vue";
+// import Aheader from "@/views/header/Header";
+import layout from "@/views/Layout";
 
-#nav {
-  padding: 30px;
+// const {createApp} = require('vue')
+const app = getCurrentInstance().appContext.config.globalProperties;
+provide("router", app.$router);
+</script>
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+<style lang="scss"></style>
