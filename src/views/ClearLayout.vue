@@ -1,5 +1,5 @@
 <template>
-  <div>공통적으로 보여지는 부분</div>
+  <div><slot /></div>
 </template>
 
 <script></script>

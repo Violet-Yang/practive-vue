@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
 // import store from "../store";
-import Vue from "vue";
+// import Vue from "vue";
 
 // console.log(Vue);
 // console.log(VueRouter);
@@ -19,34 +19,46 @@ const router = createRouter({
 });
 
 console.log(router);
-
 router.beforeEach((to, from, next) => {
-  const authRequiredList = router.filter((route) => route.meta.authRequired);
-  if (authRequiredList) alert("로그인이 필요합니다");
-  else next();
+  const auth = localStorage.getItem("auth");
+  const isAuthenticated = to.matched.some((route) => route.meta.authRequired);
+  console.log(to.name);
+  console.log("=======================]");
+  console.log(isAuthenticated);
+  console.log(auth);
+  if (to.name !== "Login" && isAuthenticated && !auth) {
+    alert("로그인을 먼저 해주세요");
+    next({ name: "Login" });
+  } else {
+    next();
+    //   const allowed = to.matched.some((route) => route.meta.allows);
 
-  // to : 이동할 url
-  // from : 현재 url
-  // next : to에서
-  // if (
-  //   // 레코드 중 경로가 일치하는 레코드를 matched 배열에 저장했다가
-  //   // to.matched 배열 안에서 라우트 레코드의 메타 필드에 접근한다
-  //   to.matched.some(function (routeInfo) {
-  //     return routeInfo.meta.authReqoiuired;
-  //   })
-  // ) {
-  //   // 사용자에게 알려주고
-  //   alert("Login please!");
-  // } else {
-  //   // 필요하지 않다면 이동하려는 페이지의 path를 표시하고
-  //   console.log("routing success :" + to.path);
-  //   // 해당 페이지로 이동한다.
-  //   next();
-  // }
+    //   if (allowed.includes(auth)) next();
+    //   else {
+    //     alert("접근 권한이 업습니다.");
+    //     console.log(from);
+    //   }
+  }
 });
 
-const app = Vue.createApp({});
-app.use(router);
-app.mount("#app");
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = to.matched.some((route) => route.meta.authRequired);
+//   console.error(from);
+//   console.error(to.name);
+//   if (isAuthenticated) {
+//     console.log(isAuthenticated);
+//     alert("로그인을 먼저 해주세요");
+//     return { name: "SignUp" };
+//   }
+//   const auth = localStorage.getItem("auth");
+//   console.log(to.meta.allows);
+//   if (auth && to.meta.allows.includes(auth)) {
+//     next();
+//   }
+// });
+
+// const app = Vue.createApp({});
+// app.use(router);
+// app.mount("#app");
 
 export default router;

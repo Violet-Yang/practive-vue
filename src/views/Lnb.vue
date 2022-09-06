@@ -11,78 +11,78 @@
       </li>
     </ul>
   </div>
-  {{ state.newLnb }}
-  {{ state.id }}
+  <p>현재 로그인 한 id : {{ state.id }}</p>
+  <button @click="logout">로그아웃</button>
 </template>
 
 <script setup>
-import { computed, reactive, inject, onMounted } from "vue";
-import store from "@/store";
+import { computed, reactive, inject, onMounted } from 'vue'
+import store from '@/store'
 
-const router = inject("router");
+const router = inject('router')
 
 const state = reactive({
-  id: null,
+  id: computed(() => store.getters['auth']),
   lnbList: [
     {
-      lnbName: "대시보드",
-      authorization: ["first", "second"],
-      lnbChild: [],
+      lnbName: '대시보드',
       active: false,
+      authorization: ['first', 'second'],
+      lnbChild: [],
     },
     {
-      lnbName: "receiving",
+      lnbName: 'receiving',
       active: false,
-      authorization: ["first"],
+      authorization: ['first'],
       lnbChild: [
         {
-          childName: "입고관리",
+          childName: '입고관리',
           active: false,
           // routerName: "ReceivingManage"
-          route: "/receiving/manage",
+          route: '/receiving/manage',
         },
         {
-          childName: "입고검수",
+          childName: '입고검수',
           active: false,
-          route: "/receiving/inspect",
+          route: '/receiving/inspect',
           // routerName: "ReceivingInspect",
         },
         {
-          childName: "입고확정",
+          childName: '입고확정',
           active: false,
-          route: "/receiving/confirm",
+          route: '/receiving/confirm',
           // routerName: "ReceivingConfirm",
         },
       ],
     },
     {
-      lnbName: "출고",
+      lnbName: '출고',
       active: false,
-      authorization: ["second"],
+      authorization: ['second'],
       lnbChild: [
         {
-          childName: "택배신청",
+          childName: '택배신청',
           active: false,
           // routerName: "ReceivingManage"
-          route: "/shipping/delivery",
+          route: '/shipping/delivery',
         },
         {
-          childName: "차량배송",
+          childName: '차량배송',
           active: false,
           // routerName: "ReceivingManage"
-          route: "/shipping/delivery",
+          route: '/shipping/delivery',
         },
         {
-          childName: "출고지시",
+          childName: '출고지시',
           active: false,
           // routerName: "ReceivingManage"
-          route: "/shipping/vehicle",
+          route: '/shipping/vehicle',
         },
         {
-          childName: "피킹",
+          childName: '피킹',
           active: false,
           // routerName: "ReceivingManage"
-          route: "/shipping/picking",
+          route: '/shipping/picking',
         },
       ],
     },
@@ -109,38 +109,45 @@ const state = reactive({
   ],
   //info.authorization : [['first', 'second'], ['first'], ['second']]
   newLnb: computed(() =>
-    state.lnbList.filter((obj) => {
-      console.error(obj.authorization);
-      console.error(state.id);
-      obj.authorization.includes(localStorage.getItem("auth"));
-    })
+    state.lnbList.filter(obj => {
+      const authId = localStorage.getItem('auth')
+      console.log(JSON.parse(authId))
+      console.log(obj.authorization.includes('first'))
+      return obj.authorization.includes(authId)
+    }),
   ),
-});
+})
 
 onMounted(() => {
-  const id = localStorage.getItem("auth");
-  state.id = id;
-
+  // const id = localStorage.getItem("auth");
+  // console.error(state.id);
+  console.log(localStorage.getItem('auth'))
+  console.log(state.newLnb)
   // state.lnbList =
   //   state.id === "first"
   //     ? state.lnbList.splice(1, state.lnbList.length)
   //     : state.lnbList.splice(0, 1);
-});
+})
 
-const click1Depth = (lnbInfo) => {
-  store.commit("setLnbActive", lnbInfo);
-  state.lnbList.map((item) => {
+const click1Depth = lnbInfo => {
+  store.commit('setLnbActive', lnbInfo)
+  state.lnbList.map(item => {
     if (item.lnbName === lnbInfo.lnbName) {
-      item.active = !item.active;
+      item.active = !item.active
     } else {
-      item.active = false;
+      item.active = false
     }
-  });
-};
+  })
+}
 
-const goPage = (route) => {
-  router.push({ path: route });
-};
+const goPage = route => {
+  router.push({ path: route })
+}
+
+const logout = () => {
+  store.commit('logout')
+  router.push({ name: 'Login' })
+}
 </script>
 
 <style lang="scss" scoped>

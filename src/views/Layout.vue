@@ -1,23 +1,39 @@
 <template>
   <div>
-    <Gnb></Gnb>
-    <Lnb></Lnb>
-    <default style="position: absolute; left: 200px; top: 10px"> </default>
+    <component :is="layout"> <slot></slot> </component>/>
   </div>
 </template>
 
-<script setup>
-import Lnb from "@/views/Lnb";
-import Gnb from "@/views/Gnb";
-import Default from "@/views/Default";
+<script>
+// import Gnb from "@/views/Gnb";
+import Default from '@/views/DefaultLayout'
+import Clear from '@/views/ClearLayout'
 
-import { inject } from "vue";
+// import router from "@/router";
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
 
-const router = inject("router");
-console.log(router);
-// const state = reactive({
+export default {
+  components: {
+    Clear,
+    Default,
+  },
 
-// })
+  setup() {
+    const route = useRoute()
+    const layout = computed(() => {
+      const layoutList = {
+        Default: 'Default',
+        Clear: 'Clear',
+      }
+      return layoutList[route.meta.layout] ?? 'Default'
+    })
+
+    return {
+      layout,
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

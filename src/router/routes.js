@@ -1,76 +1,75 @@
-const Home = () => import(/* webpackChunkName : "Hone" */ "../views/Home");
+// const Home = () => import(/* webpackChunkName : "Hone" */ "../views/Home");
 
-const SignUp = () =>
-  import(/* webpackChunkName : "Singup" */ "../views/SignUp");
+const Login = () => import(/* webpackChunkName : "Login" */ '../views/Login')
 const ReceivingManage = () =>
-  import(
-    /* webpackChunkName : "ReceivingManage" */ "../views/receiving/manage"
-  );
+  import(/* webpackChunkName : "ReceivingManage" */ '../views/receiving/manage')
 const ReceivingInspect = () =>
   import(
-    /* webpackChunkName : "ReceivingInspect" */ "../views/receiving/inspect"
-  );
+    /* webpackChunkName : "ReceivingInspect" */ '../views/receiving/inspect'
+  )
 const ReceivingConfirm = () =>
   import(
-    /* webpackChunkName : "ReceivingConfirm" */ "../views/receiving/confirm"
-  );
+    /* webpackChunkName : "ReceivingConfirm" */ '../views/receiving/confirm'
+  )
 const ShippingVehicle = () =>
-  import(
-    /* webpackChunkName : "ShippingVehicle" */ "../views/shipping/vehicle"
-  );
+  import(/* webpackChunkName : "ShippingVehicle" */ '../views/shipping/vehicle')
 const ShippingDelivery = () =>
   import(
-    /* webpackChunkName : "ShippingDelivery" */ "../views/shipping/delivery"
-  );
+    /* webpackChunkName : "ShippingDelivery" */ '../views/shipping/delivery'
+  )
 
 const routes = [
-  {
-    path: "/",
-    name: "Root",
-    component: Home,
-  },
+  // {
+  //   path: "/",
+  //   name: "Root",
+  //   component: Home,
+  // },
   {
     // path: "../views/Signup",
-    path: "/views/SignUp",
-    name: "SignUp",
-    component: SignUp,
+    path: '/',
+    name: 'Login',
+    meta: { authRequired: false, layout: 'Clear' },
+    component: Login,
   },
   {
-    path: "/receiving/manage",
-    name: "ReceivingManage",
+    path: '/receiving/manage',
+    name: 'ReceivingManage',
     component: ReceivingManage,
+    meta: { authRequired: true, allows: ['first'] },
     children: [
       {
-        path: "/receiving/inspect",
-        name: "ReceivingInspect",
+        path: '/receiving/inspect',
+        name: 'ReceivingInspect',
+        meta: { authRequired: true, allows: ['first'] },
         component: ReceivingInspect,
-        meta: { authRequired: true, allows: ["first"] },
       },
       {
-        path: "/receiving/confirm",
-        name: "ReceivingConfirm",
+        path: '/receiving/confirm',
+        name: 'ReceivingConfirm',
+        meta: { authRequired: true, allows: ['first', 'second'] },
         component: ReceivingConfirm,
-        meta: { authRequired: true, allows: ["first", "second"] },
       },
     ],
   },
   {
-    path: "/shipping/vehicle",
-    name: "ShippingVehicle",
+    path: '/shipping/vehicle',
+    name: 'ShippingVehicle',
     component: ShippingVehicle,
     children: [
       {
-        path: "/shipping/vehicle",
-        name: "ShippingVehicle",
+        path: '/shipping/vehicle',
+        name: 'ShippingVehicle',
+        meta: { authRequired: true, allows: ['second'] },
         component: ShippingVehicle,
       },
       {
-        path: "/shipping/delivery",
-        name: "ShippingDelivery",
+        path: '/shipping/delivery',
+        name: 'ShippingDelivery',
+        meta: { authRequired: true, allows: ['second'] },
         component: ShippingDelivery,
       },
     ],
   },
-];
+]
 
-export default routes;
+export default routes
