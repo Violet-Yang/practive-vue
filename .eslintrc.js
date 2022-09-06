@@ -11,6 +11,17 @@ module.exports = {
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "prettier/prettier" : [
+      'error',       {
+        singleQuote: true,
+        semi: false,
+        useTabs: false,
+        trailingComma: 'all',
+        bracketSpacing: true,
+        arrowParens: 'avoid',
+        endOfLine: 'auto',
+      },
+    ]
   },
   plugins: ["prettier"],
 };
