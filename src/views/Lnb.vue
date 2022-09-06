@@ -111,8 +111,6 @@ const state = reactive({
   newLnb: computed(() =>
     state.lnbList.filter(obj => {
       const authId = localStorage.getItem('auth')
-      console.log(JSON.parse(authId))
-      console.log(obj.authorization.includes('first'))
       return obj.authorization.includes(authId)
     }),
   ),

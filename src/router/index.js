@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from "vue-router";
-import routes from "./routes";
+import { createRouter, createWebHistory } from 'vue-router'
+import routes from './routes'
 // import store from "../store";
 // import Vue from "vue";
 
@@ -13,24 +13,24 @@ import routes from "./routes";
 // });
 
 const router = createRouter({
-  mode: "history",
+  mode: 'history',
   history: createWebHistory(),
   routes,
-});
+})
 
-console.log(router);
+console.log(router)
 router.beforeEach((to, from, next) => {
-  const auth = localStorage.getItem("auth");
-  const isAuthenticated = to.matched.some((route) => route.meta.authRequired);
-  console.log(to.name);
-  console.log("=======================]");
-  console.log(isAuthenticated);
-  console.log(auth);
-  if (to.name !== "Login" && isAuthenticated && !auth) {
-    alert("로그인을 먼저 해주세요");
-    next({ name: "Login" });
+  const auth = localStorage.getItem('auth')
+  const isAuthenticated = to.matched.some(route => route.meta.authRequired)
+  console.log(to.name)
+  console.log('=======================]')
+  console.log(isAuthenticated)
+  console.log(auth)
+  if (to.name !== 'Login' && isAuthenticated && !auth) {
+    alert('로그인을 먼저 해주세요')
+    next({ name: 'Login' })
   } else {
-    next();
+    next()
     //   const allowed = to.matched.some((route) => route.meta.allows);
 
     //   if (allowed.includes(auth)) next();
@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
     //     console.log(from);
     //   }
   }
-});
+})
 
 // router.beforeEach((to, from, next) => {
 //   const isAuthenticated = to.matched.some((route) => route.meta.authRequired);
@@ -61,4 +61,4 @@ router.beforeEach((to, from, next) => {
 // app.use(router);
 // app.mount("#app");
 
-export default router;
+export default router

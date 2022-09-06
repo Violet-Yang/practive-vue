@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import Lnb from "@/views/Lnb";
+import Lnb from '@/views/Lnb'
 </script>
 
 <style scoped></style>

@@ -5,11 +5,8 @@
 </template>
 
 <script>
-// import Gnb from "@/views/Gnb";
 import Default from '@/views/DefaultLayout'
 import Clear from '@/views/ClearLayout'
-
-// import router from "@/router";
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 
