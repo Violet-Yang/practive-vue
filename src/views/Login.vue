@@ -1,23 +1,27 @@
 <template>
-  <div style="padding: 100px">
-    {{ state.userInfo }}
-    <Form @submit="logIn">
-      <div>이메일</div>
-      <input type="text" name="id" v-model="state.userInfo.id" />
-      <div>비밀번호</div>
-      <input type="text" name="pwd" v-model="state.userInfo.pwd" />
-      <button type="submit">로그인</button>
-    </Form>
+  <div class="flex items-center justify-center">
+    <VeeForm @submit="logIn">
+      <div class="w-100 h-100 p-10 rounded-md bg-gray-100">
+        <h1 class="mb-10">HIVE-WMS</h1>
+        <div>
+          <p class="text-sm">이메일</p>
+          <input type="text" name="id" v-model="state.userInfo.id" />
+          <p class="text-sm">비밀번호</p>
+          <input type="text" name="pwd" v-model="state.userInfo.pwd" />
+        </div>
+        <button type="submit">sign in</button>
+      </div>
+    </VeeForm>
   </div>
 </template>
 
 <script setup>
-// import api from "@/http";
-import { reactive, inject, onBeforeMount } from 'vue'
-import { Form } from 'vee-validate'
+import api from '@/service/login'
+import { reactive, onBeforeMount } from 'vue'
+// import { Form } from 'vee-validate'
 
-const router = inject('router')
-const store = inject('store')
+// const router = inject('router')
+// const store = inject('store')
 const state = reactive({
   userInfo: {
     id: '',
@@ -25,25 +29,28 @@ const state = reactive({
   },
 })
 
-const logIn = () => {
+const logIn = params => {
+  console.log(params)
+  // console.error(api)
+  api.logIn(params)
   // console.log(api);
   // api.post("/sign-in", {
   //   email: state.userInfo.id,
   //   password: state.userInfo.pwd,
   // });
-  const user1 = state.userInfo.id === 'first' && state.userInfo.pwd === '1111'
-  const user2 = state.userInfo.id === 'second' && state.userInfo.pwd === '2222'
+  // const user1 = state.userInfo.id === 'first' && state.userInfo.pwd === '1111'
+  // const user2 = state.userInfo.id === 'second' && state.userInfo.pwd === '2222'
 
-  localStorage.setItem('auth', { id: state.userInfo.id })
-  if (user1 || user2) {
-    store.commit('logIn', state.userInfo.id)
-    user1
-      ? router.push({ name: 'ReceivingManage' })
-      : router.push({ name: 'ShippingDelivery' })
-  } else {
-    alert('로그인 정보를 확인해주세요')
-    return
-  }
+  // localStorage.setItem('auth', { id: state.userInfo.id })
+  // if (user1 || user2) {
+  //   store.commit('logIn', state.userInfo.id)
+  //   user1
+  //     ? router.push({ name: 'ReceivingManage' })
+  //     : router.push({ name: 'ShippingDelivery' })
+  // } else {
+  //   alert('로그인 정보를 확인해주세요')
+  //   return
+  // }
 }
 
 onBeforeMount(() => {
