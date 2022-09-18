@@ -1,10 +1,10 @@
-import axios from "axios";
-import { interceptors } from "./interceptors";
+import axios from 'axios'
+import { setInterceptors } from './interceptors'
 
 const createdAxios = axios.create({
-  baseURL: "https://hive-test2.azurewebsites.net/",
-});
+  baseURL: 'https://hive-test2.azurewebsites.net/v1.1/',
+})
 
-const api = interceptors(createdAxios);
+const api = setInterceptors(createdAxios)
 
-export default api;
+export default api

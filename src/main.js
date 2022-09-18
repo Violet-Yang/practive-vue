@@ -1,7 +1,9 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import store from "./store";
-import router from "./router";
+import { createApp } from 'vue'
+import App from './App.vue'
+import store from './store'
+import router from './router'
+import { Form } from 'vee-validate'
+import './styles/index.css'
 
 // new Vue({
 //   el: "#app",
@@ -10,13 +12,13 @@ import router from "./router";
 //   template: "<App/>",
 // });
 
-const app = createApp(App);
+const app = createApp(App)
 
-console.log(router);
+app.component('VeeForm', Form)
 
-app.use(store);
-app.use(router);
-app.mount("#app");
+app.use(store)
+app.use(router)
+app.mount('#app')
 // const app = createApp(App);
 // app.use(router);
 // app.mount("#app");
