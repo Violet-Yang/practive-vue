@@ -7,4 +7,4 @@ const createdAxios = axios.create({
 
 const api = setInterceptors(createdAxios)
 
-export default api
+export { api }

@@ -5,9 +5,9 @@
         <h1 class="mb-10">HIVE-WMS</h1>
         <div>
           <p class="text-sm">이메일</p>
-          <input type="text" name="id" v-model="state.userInfo.id" />
+          <input type="text" v-model="state.userInfo.id" />
           <p class="text-sm">비밀번호</p>
-          <input type="text" name="pwd" v-model="state.userInfo.pwd" />
+          <input type="text" v-model="state.userInfo.pwd" />
         </div>
         <button type="submit">sign in</button>
       </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import api from '@/service/login'
+import loginService from '@/service/login'
 import { reactive, onBeforeMount } from 'vue'
 // import { Form } from 'vee-validate'
 
@@ -29,10 +29,11 @@ const state = reactive({
   },
 })
 
-const logIn = params => {
-  console.log(params)
-  // console.error(api)
-  api.logIn(params)
+const logIn = () => {
+  console.error(loginService)
+  console.log(state.userInfo)
+  // console.error(loginService)
+  loginService.login(state.userInfo)
   // console.log(api);
   // api.post("/sign-in", {
   //   email: state.userInfo.id,

@@ -1,10 +1,15 @@
-import axios from '@/http'
+import api from '@/http'
+// import axios from 'axios'
 
-class loginService {
+console.log(loginService)
+export class loginService {
   login = params => {
-    console.log(params)
-    return axios.post('sign-in', params)
+    console.log('22222222')
+    console.log(api)
+
+    return api.post('sign-in', params)
   }
 }
 
-export default loginService
+// export { loginService }
+// export default new loginService()
