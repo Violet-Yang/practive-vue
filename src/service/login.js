@@ -1,8 +1,7 @@
 import api from '@/http'
 // import axios from 'axios'
 
-console.log(loginService)
-export class loginService {
+class loginService {
   login = params => {
     console.log('22222222')
     console.log(api)
@@ -12,4 +11,4 @@ export class loginService {
 }
 
 // export { loginService }
-// export default new loginService()
+export default new loginService()
