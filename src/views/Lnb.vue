@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, inject, onMounted } from 'vue'
+import { computed, reactive, inject } from 'vue'
 import store from '@/store'
 
 const router = inject('router')
@@ -114,17 +114,6 @@ const state = reactive({
       return obj.authorization.includes(authId)
     }),
   ),
-})
-
-onMounted(() => {
-  // const id = localStorage.getItem("auth");
-  // console.error(state.id);
-  console.log(localStorage.getItem('auth'))
-  console.log(state.newLnb)
-  // state.lnbList =
-  //   state.id === "first"
-  //     ? state.lnbList.splice(1, state.lnbList.length)
-  //     : state.lnbList.splice(0, 1);
 })
 
 const click1Depth = lnbInfo => {

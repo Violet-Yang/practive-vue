@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import loginService from '@/service/login'
-import { reactive, onBeforeMount } from 'vue'
+import Api from '@/service/login'
+import { reactive } from 'vue'
 // import { Form } from 'vee-validate'
 
 // const router = inject('router')
@@ -30,10 +30,9 @@ const state = reactive({
 })
 
 const logIn = () => {
-  console.error(loginService)
   console.log(state.userInfo)
   // console.error(loginService)
-  loginService.login(state.userInfo)
+  Api.login(state.userInfo)
   // console.log(api);
   // api.post("/sign-in", {
   //   email: state.userInfo.id,
@@ -53,11 +52,6 @@ const logIn = () => {
   //   return
   // }
 }
-
-onBeforeMount(() => {
-  console.log('login beforeMount')
-  // localStorage.clear();
-})
 </script>
 
 <style scoped></style>
