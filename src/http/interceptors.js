@@ -29,4 +29,5 @@ export function setInterceptors(createdAxios) {
       return Promise.reject(error)
     },
   )
+  return createdAxios
 }

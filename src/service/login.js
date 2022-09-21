@@ -3,9 +3,6 @@ import api from '@/http'
 
 class loginService {
   login = params => {
-    console.log('22222222')
-    console.log(api)
-
     return api.post('sign-in', params)
   }
 }

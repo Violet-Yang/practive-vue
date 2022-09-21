@@ -7,6 +7,7 @@ const callAxios = () => {
   })
   return setInterceptors(created)
 }
+
 const api = callAxios()
 
 export default api

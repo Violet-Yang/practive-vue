@@ -30,7 +30,6 @@ const state = reactive({
 })
 
 const logIn = () => {
-  console.log(state.userInfo)
   // console.error(loginService)
   Api.login(state.userInfo)
   // console.log(api);
