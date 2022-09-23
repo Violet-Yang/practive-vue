@@ -1,5 +1,7 @@
 // const Home = () => import(/* webpackChunkName : "Hone" */ "../views/Home");
 
+const Error = () =>
+  import(/* webpackChunkName : "Error" */ '../views/ErrorPage')
 const Login = () => import(/* webpackChunkName : "Login" */ '../views/Login')
 const ReceivingManage = () =>
   import(/* webpackChunkName : "ReceivingManage" */ '../views/receiving/manage')
@@ -24,6 +26,12 @@ const routes = [
   //   name: "Root",
   //   component: Home,
   // },
+  {
+    path: '/error',
+    name: 'Error',
+    meta: { authRequired: false, layout: 'Clear' },
+    component: Error,
+  },
   {
     // path: "../views/Signup",
     path: '/',
