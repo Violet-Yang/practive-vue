@@ -5,9 +5,9 @@
         <h1 class="mb-10">HIVE-WMS</h1>
         <div>
           <p class="text-sm">이메일</p>
-          <input type="text" v-model="state.userInfo.id" />
+          <input type="text" v-model="state.userInfo.email" />
           <p class="text-sm">비밀번호</p>
-          <input type="text" v-model="state.userInfo.pwd" />
+          <input type="text" v-model="state.userInfo.password" />
         </div>
         <button type="submit">sign in</button>
       </div>
@@ -17,21 +17,30 @@
 
 <script setup>
 import Api from '@/service/login'
-import { reactive } from 'vue'
+import { reactive, inject } from 'vue'
+
 // import { Form } from 'vee-validate'
 
-// const router = inject('router')
-// const store = inject('store')
+const router = inject('router')
+const store = inject('store')
+
 const state = reactive({
   userInfo: {
-    id: '',
-    pwd: '',
+    email: '',
+    password: '',
   },
 })
 
-const logIn = () => {
+const logIn = async () => {
   // console.error(loginService)
-  Api.login(state.userInfo)
+  const { data } = await Api.login(state.userInfo)
+  //로그인 성공했을 때 그 결과값을 localStrage에 저장
+  //저장할 데이터는 jwt토큰 & refreshtoken
+  console.log(data)
+  const { jwtToken, refreshToken } = data
+  // console.log(refreshToken)
+  store.commit('Auth/logIn', { jwtToken, refreshToken })
+  router.push({ name: 'ReceivingManage' })
   // console.log(api);
   // api.post("/sign-in", {
   //   email: state.userInfo.id,

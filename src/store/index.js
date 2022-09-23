@@ -1,5 +1,8 @@
 import { createStore } from 'vuex'
 
+// * 공통 store
+import Auth from './common/auth'
+
 export default createStore({
   state: {
     auth: '',
@@ -18,12 +21,19 @@ export default createStore({
       // 클릭한 대메뉴의 active->true로 변경
     },
   },
-  actions: {},
+  actions: {
+    testAction({ state, commit, rootState }) {
+      console.log(rootState)
+      if (state.auth) {
+        commit('logout')
+      }
+    },
+  },
   getters: {
     lnbData(state) {
       return state.lnbData
     },
     auth: state => state.auth,
   },
-  modules: {},
+  modules: { Auth },
 })
