@@ -1,4 +1,4 @@
-export const Auth = {
+const Auth = {
   namespaced: true,
   state: {
     jwtToken: '',
@@ -15,3 +15,5 @@ export const Auth = {
   actions: {},
   getters: {},
 }
+
+export default Auth
