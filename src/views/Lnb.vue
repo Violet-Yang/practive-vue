@@ -18,11 +18,12 @@
 <script setup>
 import { computed, reactive, inject } from 'vue'
 import store from '@/store'
+// import Auth from '@/store/common/auth'
 
 const router = inject('router')
 
 const state = reactive({
-  id: computed(() => store.getters['auth']),
+  id: computed(() => store.getters['Auth/userName']),
   lnbList: [
     {
       lnbName: '대시보드',

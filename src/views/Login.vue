@@ -33,11 +33,11 @@ const state = reactive({
 
 const logIn = async () => {
   // console.error(loginService)
-  const { data } = await Api.login(state.userInfo)
+  const {
+    data: { jwtToken, refreshToken },
+  } = await Api.login(state.userInfo)
   //로그인 성공했을 때 그 결과값을 localStrage에 저장
   //저장할 데이터는 jwt토큰 & refreshtoken
-  console.log(data)
-  const { jwtToken, refreshToken } = data
   // console.log(refreshToken)
   store.commit('Auth/logIn', { jwtToken, refreshToken })
   router.push({ name: 'ReceivingManage' })
