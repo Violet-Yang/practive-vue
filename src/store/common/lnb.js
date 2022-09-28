@@ -1,16 +1,18 @@
 const Lnb = {
+  // *해당 파일을 모듈화시켜 전역으로 사용되도록
+  namespaced: true,
   state: {
     lnbList: [],
   },
   mutations: {
-    getLnb(state, lnb) {
+    setLnbData(state, lnb) {
       state.lnbList = lnb
       console.log(state.lnbList)
     },
   },
   actions: {
-    setLnbData({ commit }, lnb) {
-      commit('getLnb', lnb)
+    getLnbData({ commit }, lnb) {
+      commit('setLnbData', lnb)
     },
   },
   getters: {
@@ -18,4 +20,4 @@ const Lnb = {
   },
 }
 
-export default { Lnb }
+export default Lnb

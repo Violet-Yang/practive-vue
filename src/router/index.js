@@ -19,10 +19,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // const auth = localStorage.getItem('auth')
+  const userName = localStorage.getItem('userName')
   const isAuthenticated = to.matched.some(route => route.meta.authRequired)
 
-  if (isAuthenticated) {
+  if (isAuthenticated && !userName) {
     // 로그인 정보가 없을 때 로그인 페이지로 이동
     alert('로그인을 먼저 해주세요')
     // 접근권한이 없을 때 이전 페이지로 redirect

@@ -1,18 +1,28 @@
 <template>
-  <div class="lnb-wrap">
-    <ul v-for="(lnb, index) in state.newLnb" :key="index">
-      <li>
-        <div @click="click1Depth(lnb)">{{ lnb.lnbName }}</div>
-        <div v-for="child in lnb.lnbChild" :key="child">
-          <div v-if="lnb.active" @click="goPage(child.route)">
-            {{ child.childName }}
+  <div class="flex flex-col justify-between w-200 bg-gray-800">
+    <div class="lnb-wrap">
+      <ul class="h-100" v-for="(lnb, index) in state.lnbList" :key="index">
+        <li>
+          <div class="text-xl text-gray-100" @click="click1Depth(lnb)">
+            {{ lnb.lnbName }}
           </div>
-        </div>
-      </li>
-    </ul>
+          <div v-for="child in lnb.lnbChild" :key="child">
+            <div
+              v-if="lnb.active"
+              class="text-gray-100"
+              @click="goPage(child.route)"
+            >
+              {{ child.childName }}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <p>현재 로그인 한 id : {{ state.id }}</p>
+      <button @click="logout">로그아웃</button>
+    </div>
   </div>
-  <p>현재 로그인 한 id : {{ state.id }}</p>
-  <button @click="logout">로그아웃</button>
 </template>
 
 <script setup>
@@ -24,6 +34,7 @@ const router = inject('router')
 
 const state = reactive({
   id: computed(() => store.getters['Auth/userName']),
+  // lnbList: computed(() => store.getters['Lnb/lnbList']),
   lnbList: [
     {
       lnbName: '대시보드',
@@ -32,7 +43,7 @@ const state = reactive({
       lnbChild: [],
     },
     {
-      lnbName: 'receiving',
+      lnbName: '입고',
       active: false,
       authorization: ['first'],
       lnbChild: [
@@ -118,12 +129,11 @@ const state = reactive({
 })
 
 const click1Depth = lnbInfo => {
-  store.commit('setLnbActive', lnbInfo)
+  // store.commit('setLnbActive', lnbInfo)
+
   state.lnbList.map(item => {
-    if (item.lnbName === lnbInfo.lnbName) {
-      item.active = !item.active
-    } else {
-      item.active = false
+    if (lnbInfo.lnbName === item.lnbName) {
+      lnbInfo.active = !lnbInfo.active
     }
   })
 }
@@ -140,7 +150,7 @@ const logout = () => {
 
 <style lang="scss" scoped>
 .lnb-wrap {
-  position: fixed;
+  // position: fixed;
   top: 0;
   left: 0;
 }

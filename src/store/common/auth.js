@@ -1,6 +1,5 @@
-// import { inject } from 'vue'
+import store from '@/store/index'
 import decode from 'jwt-decode'
-// const store = inject('store')
 
 const Auth = {
   namespaced: true,
@@ -18,15 +17,16 @@ const Auth = {
       localStorage.clear()
       const decodedToken = decode(jwtToken)
       console.log(decodedToken)
-      localStorage.setItem('roles', JSON.stringify(decodedToken.roles))
-      localStorage.setItem('userName', JSON.stringify(decodedToken.username))
+      localStorage.setItem('roles', decodedToken.roles)
+      localStorage.setItem('userName', decodedToken.username)
       localStorage.setItem('lnbData', JSON.stringify(decodedToken.lnbData))
-      localStorage.setItem('jwtToken', JSON.stringify(jwtToken))
-      localStorage.setItem('refreshToken', JSON.stringify(refreshToken))
+      localStorage.setItem('jwtToken', jwtToken)
+      localStorage.setItem('refreshToken', refreshToken)
 
       state.roles = decodedToken.roles
+      state.userName = decodedToken.username
 
-      // store.dispatch('Lnb/setLnbData', decodedToken.lnbData)
+      store.dispatch('Lnb/getLnbData', JSON.stringify(decodedToken.lnbData))
     },
   },
   actions: {},
