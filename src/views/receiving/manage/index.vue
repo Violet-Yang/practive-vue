@@ -1,5 +1,7 @@
 <template>
-  <div>입고관리 페이지</div>
+  <div>페이지</div>
+
+  <agGrid />
 </template>
 
 <script setup></script>

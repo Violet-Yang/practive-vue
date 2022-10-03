@@ -3,6 +3,7 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import { Form } from 'vee-validate'
+import { AgGridVue } from 'ag-grid-vue3'
 import './styles/index.css'
 
 // new Vue({
@@ -15,6 +16,7 @@ import './styles/index.css'
 const app = createApp(App)
 
 app.component('VeeForm', Form)
+app.component('AgGrid', AgGridVue)
 
 app.use(store)
 app.use(router)
