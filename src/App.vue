@@ -19,4 +19,6 @@ provide('router', app.$router)
 // })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import './assets/css/common.css';
+</style>

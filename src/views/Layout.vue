@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <component :is="layout"> <slot></slot> </component>/>
+  <div class="h-full">
+    <component :is="layout"> <slot></slot> </component>
   </div>
 </template>
 
