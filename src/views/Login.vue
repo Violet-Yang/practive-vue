@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center">
     <VeeForm @submit="logIn">
-      <div class="w-100 h-100 p-10 rounded-md bg-gray-100">
+      <div class="p-10 rounded-md bg-gray-100">
         <h1 class="mb-10">HIVE-WMS</h1>
         <div>
           <p class="text-sm">이메일</p>

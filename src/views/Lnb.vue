@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col justify-between w-200 bg-gray-800">
+  <div class="flex flex-col justify-between w-150 bg-gray-800 h-full">
     <div class="lnb-wrap">
-      <ul class="h-100" v-for="(lnb, index) in state.lnbList" :key="index">
-        <li>
+      <ul v-for="(lnb, index) in state.lnbList" :key="index">
+        <li class="p-10">
           <div class="text-xl text-gray-100" @click="click1Depth(lnb)">
             {{ lnb.lnbName }}
           </div>
@@ -19,7 +19,7 @@
       </ul>
     </div>
     <div>
-      <p>현재 로그인 한 id : {{ state.id }}</p>
+      <p>{{ state.id }}</p>
       <button @click="logout">로그아웃</button>
     </div>
   </div>
@@ -33,7 +33,8 @@ import store from '@/store'
 const router = inject('router')
 
 const state = reactive({
-  id: computed(() => store.getters['Auth/userName']),
+  id: localStorage.getItem('userName'),
+  // id: computed(() => store.getters['Auth/userName']),
   // lnbList: computed(() => store.getters['Lnb/lnbList']),
   lnbList: [
     {
