@@ -1,9 +1,9 @@
 <template>
-  <div class="flex bg-gray-500 h-full">
+  <div class="flex h-full">
     <Lnb class="left-0"></Lnb>
     <div>
-      <Tab class="w-full bg-gray-400 fixed top-0 h-55"></Tab>
-      <div class="fixed top-55">
+      <Tab class="w-full bg-gray-800 fixed top-0 h-40"></Tab>
+      <div class="fixed top-40">
         <slot></slot>
       </div>
     </div>

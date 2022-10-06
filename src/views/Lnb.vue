@@ -6,13 +6,13 @@
           <div class="text-xl text-gray-100" @click="click1Depth(lnb)">
             {{ lnb.lnbName }}
           </div>
-          <div v-for="child in lnb.lnbChild" :key="child">
+          <div v-for="{ childName, route } in lnb.lnbChild" :key="route">
             <div
               v-if="lnb.active"
               class="text-gray-100"
-              @click="goPage(child.route)"
+              @click="goPage(route, childName)"
             >
-              {{ child.childName }}
+              {{ childName }}
             </div>
           </div>
         </li>
@@ -139,8 +139,10 @@ const click1Depth = lnbInfo => {
   })
 }
 
-const goPage = route => {
+const goPage = (route, label) => {
+  console.log(label)
   router.push({ path: route })
+  store.commit('Tab/mutateTabList', label)
 }
 
 const logout = () => {

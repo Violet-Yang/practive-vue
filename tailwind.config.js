@@ -10,7 +10,12 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
+        5: convertRemToPx(5),
         10: convertRemToPx(10),
+        30: convertRemToPx(30),
+        36: convertRemToPx(36),
+        40: convertRemToPx(40),
+        45: convertRemToPx(45),
         50: convertRemToPx(50),
         55: convertRemToPx(55),
         60: convertRemToPx(60),

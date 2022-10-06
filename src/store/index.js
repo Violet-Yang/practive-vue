@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 // * 공통 store
 import Auth from './common/auth'
 import Lnb from './common/lnb'
+import Tab from './common/tab'
 
 export default createStore({
   state: {
@@ -36,5 +37,5 @@ export default createStore({
     },
     auth: state => state.auth,
   },
-  modules: { Auth, Lnb },
+  modules: { Auth, Lnb, Tab },
 })
