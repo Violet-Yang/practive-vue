@@ -8,7 +8,7 @@ const Auth = {
     refreshToken: '',
     userName: '',
     roles: '',
-    lnbData: [],
+    lnbData: {},
   },
   mutations: {
     logIn: (state, { jwtToken, refreshToken }) => {
@@ -16,7 +16,6 @@ const Auth = {
       state.refreshToken = refreshToken
       localStorage.clear()
       const decodedToken = decode(jwtToken)
-      console.log(decodedToken)
       localStorage.setItem('roles', decodedToken.roles)
       localStorage.setItem('userName', decodedToken.username)
       localStorage.setItem('lnbData', JSON.stringify(decodedToken.lnbData))

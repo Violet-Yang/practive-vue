@@ -2,7 +2,7 @@ const Lnb = {
   // *해당 파일을 모듈화시켜 전역으로 사용되도록
   namespaced: true,
   state: {
-    lnbList: [],
+    lnbList: {},
   },
   mutations: {
     setLnbData(state, lnb) {

@@ -35,7 +35,7 @@ const router = inject('router')
 const state = reactive({
   id: localStorage.getItem('userName'),
   // id: computed(() => store.getters['Auth/userName']),
-  // lnbList: computed(() => store.getters['Lnb/lnbList']),
+  lnb: localStorage.getItem('lnbData'),
   lnbList: [
     {
       lnbName: '대시보드',
@@ -146,9 +146,19 @@ const goPage = (route, label) => {
 }
 
 const logout = () => {
-  store.commit('logout')
+  localStorage.clear()
   router.push({ name: 'Login' })
 }
+
+const setInitLnb = () => {
+  // if (state.lnb) return
+  // state.lnb = localStorage.getItem('lnbData')
+  console.log(state.lnb)
+  console.log(Object.keys(state.lnb))
+  // console.log(router)
+}
+
+setInitLnb()
 </script>
 
 <style lang="scss" scoped>
