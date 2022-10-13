@@ -1,18 +1,18 @@
 <template>
   <div class="flex flex-col justify-between w-150 bg-gray-800 h-full">
     <div class="lnb-wrap">
-      <ul v-for="(lnb, index) in state.lnbList" :key="index">
+      <ul v-for="(title, index) in state.lnb" :key="index">
         <li class="p-10">
-          <div class="text-xl text-gray-100" @click="click1Depth(lnb)">
-            {{ lnb.lnbName }}
+          <div class="text-xl text-gray-100" @click="clickTitle(title)">
+            {{ title[0] }}
           </div>
-          <div v-for="{ childName, route } in lnb.lnbChild" :key="route">
+          <div v-for="{ label, route } in title[1].child" :key="route">
             <div
-              v-if="lnb.active"
+              v-if="title[1].isActive"
               class="text-gray-100"
-              @click="goPage(route, childName)"
+              @click="goPage(route, label)"
             >
-              {{ childName }}
+              {{ label }}
             </div>
           </div>
         </li>
@@ -35,7 +35,8 @@ const router = inject('router')
 const state = reactive({
   id: localStorage.getItem('userName'),
   // id: computed(() => store.getters['Auth/userName']),
-  lnb: localStorage.getItem('lnbData'),
+  lnb: Object.entries(JSON.parse(localStorage.getItem('lnbData'))),
+  lnb2: [],
   lnbList: [
     {
       lnbName: '대시보드',
@@ -129,14 +130,19 @@ const state = reactive({
   ),
 })
 
-const click1Depth = lnbInfo => {
+const clickTitle = lnbInfo => {
   // store.commit('setLnbActive', lnbInfo)
-
-  state.lnbList.map(item => {
-    if (lnbInfo.lnbName === item.lnbName) {
-      lnbInfo.active = !lnbInfo.active
+  console.error(lnbInfo)
+  state.lnb.map(lnb => {
+    if (lnb[0] === lnbInfo[0]) {
+      lnb[1].isActive = !lnbInfo[1].isActive
     }
   })
+  // state.lnb.map(lnb => {
+  //   if (lnbInfo.lnbName === lnb.lnbName) {
+  //     lnbInfo.active = !lnbInfo.active
+  //   }
+  // })
 }
 
 const goPage = (route, label) => {
@@ -153,9 +159,24 @@ const logout = () => {
 const setInitLnb = () => {
   // if (state.lnb) return
   // state.lnb = localStorage.getItem('lnbData')
-  console.log(state.lnb)
-  console.log(Object.keys(state.lnb))
+  console.log(Object.entries(state.lnb))
+  // let lnb = Object.entries(state.lnb)
+  // // [{receiving : {child : [{label : 'receivingStatus'}], active : false}}]
+  // lnb.map([key.value] => {
+  //   console.log(key)
+  //   console.error(value.child)
+  // })
+
+  // [{"receiving":{"isActive":false,
+  //"child":[{"label":"receivingOrder","route":"/receiving/order","isActive":false},
+  //         {"label":"receivingManage","route":"/receiving/manage","isActive":false},
+  //         {"label":"receivingInspect","route":"/receiving/inspect","isActive":false},
+  //         {"label":"receivingConfirm","route":"/receiving/confirm","isActive":false},
+  //         {"label":"receivingStack","route":"/receiving/stack","isActive":false}]
+  //         ]
   // console.log(router)
+  //key값들이 대메뉴
+  //key.child를 for문으로 풀어낸 뒤 child.label 로 ui에 매핑
 }
 
 setInitLnb()
