@@ -4,7 +4,7 @@
       <ul v-for="(title, index) in state.lnb" :key="index">
         <li class="p-10">
           <div class="text-xl text-gray-100" @click="clickTitle(title)">
-            {{ title[0] }}
+            {{ $t(`field.${title[0]}`) }}
           </div>
           <div v-for="{ label, route } in title[1].child" :key="route">
             <div
@@ -12,7 +12,7 @@
               class="text-gray-100"
               @click="goPage(route, label)"
             >
-              {{ label }}
+              {{ $t(`field.${label}`) }}
             </div>
           </div>
         </li>
@@ -31,6 +31,9 @@ import store from '@/store'
 // import Auth from '@/store/common/auth'
 
 const router = inject('router')
+// const $t = inject('i18')
+
+// console.log($t)
 
 const state = reactive({
   id: localStorage.getItem('userName'),
