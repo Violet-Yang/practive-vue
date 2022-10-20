@@ -30,6 +30,7 @@ app.use(store)
 app.use(router)
 app.use(i18)
 app.provide(i18, '$t')
+app.provide(app.route, 'route')
 app.mount('#app')
 // const app = createApp(App);
 // app.use(router);

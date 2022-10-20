@@ -25,7 +25,7 @@ const Auth = {
       state.roles = decodedToken.roles
       state.userName = decodedToken.username
 
-      store.dispatch('Lnb/getLnbData', JSON.stringify(decodedToken.lnbData))
+      store.dispatch('Lnb/setLnbData', JSON.stringify(decodedToken.lnbData))
     },
   },
   actions: {},

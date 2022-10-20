@@ -43,18 +43,18 @@ const routes = [
     path: '/receiving/manage',
     name: 'ReceivingManage',
     component: ReceivingManage,
-    meta: { authRequired: true },
+    meta: { authRequired: true, title: 'receivingManage' },
     children: [
       {
         path: '/receiving/inspect',
         name: 'ReceivingInspect',
-        meta: { authRequired: true },
+        meta: { authRequired: true, title: 'receivingInspect' },
         component: ReceivingInspect,
       },
       {
         path: '/receiving/confirm',
         name: 'ReceivingConfirm',
-        meta: { authRequired: true },
+        meta: { authRequired: true, title: 'receivingConfirm' },
         component: ReceivingConfirm,
       },
     ],
@@ -67,13 +67,17 @@ const routes = [
       {
         path: '/shipping/vehicle',
         name: 'ShippingVehicle',
-        meta: { authRequired: true },
+        meta: { authRequired: true, title: 'shippingVehicle' },
         component: ShippingVehicle,
       },
       {
         path: '/shipping/delivery',
         name: 'ShippingDelivery',
-        meta: { authRequired: true, allows: 'admin' },
+        meta: {
+          authRequired: true,
+          allows: 'admin',
+          title: 'shippingDelivery',
+        },
         component: ShippingDelivery,
       },
     ],

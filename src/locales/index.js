@@ -21,7 +21,7 @@ const messages = {
       shippingPicking: '피킹',
       shippingMakeUp: '보충지시',
       shippingPacking: '검수패킹',
-      shippingOtherCost: '기타비용',
+      shippingOtherCost: '검수패킹',
       shippingFailedInvoice: '미출력송장',
       shippingStatus: '출고현황',
       shippingDeliveryStatus: '배송상태조회',

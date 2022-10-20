@@ -6,7 +6,7 @@
       :key="index"
     >
       <li class="w-100 h-36 bg-white flex gap-3 rounded-t-md p-5">
-        {{ info.value }}
+        {{ $t(`field.${info.value}`) }}
         <div>x</div>
       </li>
     </ul>
@@ -17,13 +17,17 @@
 import { computed, inject, reactive } from 'vue'
 
 const store = inject('store')
+// const route = inject('route')
+
 const state = reactive({
   // tabInfo: [
   //   { title: '입고관리' },
   //   { title: '입고관리' },
   //   { title: '입고관리' },
   // ],
-  tabInfo: computed(() => store.getters['Tab/tabList']),
+  tabInfo: computed(() => {
+    return store.getters['Tab/tabList']
+  }),
 })
 
 // const props = defineProps({

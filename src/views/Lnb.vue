@@ -31,9 +31,6 @@ import store from '@/store'
 // import Auth from '@/store/common/auth'
 
 const router = inject('router')
-// const $t = inject('i18')
-
-// console.log($t)
 
 const state = reactive({
   id: localStorage.getItem('userName'),
@@ -135,7 +132,6 @@ const state = reactive({
 
 const clickTitle = lnbInfo => {
   // store.commit('setLnbActive', lnbInfo)
-  console.error(lnbInfo)
   state.lnb.map(lnb => {
     if (lnb[0] === lnbInfo[0]) {
       lnb[1].isActive = !lnbInfo[1].isActive
@@ -149,7 +145,7 @@ const clickTitle = lnbInfo => {
 }
 
 const goPage = (route, label) => {
-  console.log(label)
+  console.log(label, route)
   router.push({ path: route })
   store.commit('Tab/mutateTabList', label)
 }
@@ -158,31 +154,6 @@ const logout = () => {
   localStorage.clear()
   router.push({ name: 'Login' })
 }
-
-const setInitLnb = () => {
-  // if (state.lnb) return
-  // state.lnb = localStorage.getItem('lnbData')
-  console.log(Object.entries(state.lnb))
-  // let lnb = Object.entries(state.lnb)
-  // // [{receiving : {child : [{label : 'receivingStatus'}], active : false}}]
-  // lnb.map([key.value] => {
-  //   console.log(key)
-  //   console.error(value.child)
-  // })
-
-  // [{"receiving":{"isActive":false,
-  //"child":[{"label":"receivingOrder","route":"/receiving/order","isActive":false},
-  //         {"label":"receivingManage","route":"/receiving/manage","isActive":false},
-  //         {"label":"receivingInspect","route":"/receiving/inspect","isActive":false},
-  //         {"label":"receivingConfirm","route":"/receiving/confirm","isActive":false},
-  //         {"label":"receivingStack","route":"/receiving/stack","isActive":false}]
-  //         ]
-  // console.log(router)
-  //key값들이 대메뉴
-  //key.child를 for문으로 풀어낸 뒤 child.label 로 ui에 매핑
-}
-
-setInitLnb()
 </script>
 
 <style lang="scss" scoped>

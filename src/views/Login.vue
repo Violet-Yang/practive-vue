@@ -1,17 +1,21 @@
 <template>
-  <div class="flex items-center justify-center">
-    <VeeForm @submit="logIn">
-      <div class="p-10 rounded-md bg-gray-100">
-        <h1 class="mb-10">HIVE-WMS</h1>
-        <div>
-          <p class="text-sm">이메일</p>
-          <input type="text" v-model="state.userInfo.email" />
-          <p class="text-sm">비밀번호</p>
-          <input type="text" v-model="state.userInfo.password" />
+  <div
+    class="fixed top-0 left-0 flex items-center justify-center w-full h-full"
+  >
+    <div class="p-10 rounded-lg bg-gray-100 w-500 h-250">
+      <VeeForm @submit="logIn">
+        <div class="flex items-center justify-center">
+          <div>
+            <h1 class="mb-10">HIVE-WMS</h1>
+            <p class="text-sm">이메일</p>
+            <input type="text" v-model="state.userInfo.email" />
+            <p class="text-sm">비밀번호</p>
+            <input type="text" v-model="state.userInfo.password" />
+            <button type="submit" class="block">sign in</button>
+          </div>
         </div>
-        <button type="submit">sign in</button>
-      </div>
-    </VeeForm>
+      </VeeForm>
+    </div>
   </div>
 </template>
 
@@ -32,33 +36,18 @@ const state = reactive({
 })
 
 const logIn = async () => {
-  // console.error(loginService)
-  const {
-    data: { jwtToken, refreshToken },
-  } = await Api.login(state.userInfo)
+  try {
+    const {
+      data: { jwtToken, refreshToken },
+    } = await Api.login(state.userInfo)
+    store.commit('Auth/logIn', { jwtToken, refreshToken })
+    store.commit('Tab/mutateTabList', 'ReceivingManage')
+    router.push({ name: 'ReceivingManage' })
+  } catch (e) {
+    console.error(e)
+  }
   //로그인 성공했을 때 그 결과값을 localStrage에 저장
   //저장할 데이터는 jwt토큰 & refreshtoken
-  // console.log(refreshToken)
-  store.commit('Auth/logIn', { jwtToken, refreshToken })
-  router.push({ name: 'ReceivingManage' })
-  // console.log(api);
-  // api.post("/sign-in", {
-  //   email: state.userInfo.id,
-  //   password: state.userInfo.pwd,
-  // });
-  // const user1 = state.userInfo.id === 'first' && state.userInfo.pwd === '1111'
-  // const user2 = state.userInfo.id === 'second' && state.userInfo.pwd === '2222'
-
-  // localStorage.setItem('auth', { id: state.userInfo.id })
-  // if (user1 || user2) {
-  //   store.commit('logIn', state.userInfo.id)
-  //   user1
-  //     ? router.push({ name: 'ReceivingManage' })
-  //     : router.push({ name: 'ShippingDelivery' })
-  // } else {
-  //   alert('로그인 정보를 확인해주세요')
-  //   return
-  // }
 }
 </script>
 

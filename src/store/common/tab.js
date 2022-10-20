@@ -7,11 +7,7 @@ const Tab = {
   actions: {},
   mutations: {
     mutateTabList(state, tabName) {
-      console.error(tabName)
-      // state.tabList.set('label', tabName)
       state.tabList.set(tabName, tabName)
-      // state.tabList.push(tabName)
-      console.log(state.tabList)
     },
   },
   getters: {

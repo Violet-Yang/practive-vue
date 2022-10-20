@@ -5,14 +5,20 @@ const Lnb = {
     lnbList: {},
   },
   mutations: {
-    setLnbData(state, lnb) {
-      state.lnbList = lnb
-      console.log(state.lnbList)
+    mutateLnbData(state, lnb) {
+      const excludedList = ['receivingOrder', 'shippingOrder']
+      const lnbList = lnb ? lnb : localStorage.getItem('lnbData')
+      console.log(excludedList)
+      // lnbList내에 excludedList가 존재하면
+      // lnbList에서 해당 lnb네임 삭제
+      if (![lnbList].includes(excludedList)) {
+        console.log(lnbList)
+      }
     },
   },
   actions: {
-    getLnbData({ commit }, lnb) {
-      commit('setLnbData', lnb)
+    setLnbData({ commit }, lnb) {
+      commit('mutateLnbData', lnb)
     },
   },
   getters: {

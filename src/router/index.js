@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
-// import store from "../store";
+import store from '../store/index'
 // import Vue from "vue";
 
 // console.log(Vue);
@@ -19,6 +19,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // 로그인 하자마자 입고관리 페이지로 이동
+  // to.authRequired가 true인데, localStorage의 userName이 없으면
+  // from 라우터로 리다이렉트
   const userName = localStorage.getItem('userName')
   const isAuthenticated = to.matched.some(route => route.meta.authRequired)
 
@@ -29,6 +32,8 @@ router.beforeEach((to, from, next) => {
     next({ name: 'Login' })
   } else {
     next()
+    store.commit('Tab/mutateTabList', to.meta.title)
+
     //   const allowed = to.matched.some((route) => route.meta.allows);
 
     //   if (allowed.includes(auth)) next();
