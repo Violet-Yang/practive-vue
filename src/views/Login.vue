@@ -41,7 +41,6 @@ const logIn = async () => {
       data: { jwtToken, refreshToken },
     } = await Api.login(state.userInfo)
     store.commit('Auth/logIn', { jwtToken, refreshToken })
-    store.commit('Tab/mutateTabList', 'ReceivingManage')
     router.push({ name: 'ReceivingManage' })
   } catch (e) {
     console.error(e)

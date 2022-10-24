@@ -9,6 +9,15 @@ const Tab = {
     mutateTabList(state, tabName) {
       state.tabList.set(tabName, tabName)
     },
+    deleteTab(state, tab) {
+      if (!tab) {
+        for (const tab of state.tabList) {
+          state.tabList.delete(tab[0])
+          return
+        }
+      }
+      state.tabList.delete(tab)
+    },
   },
   getters: {
     tabList: state =>

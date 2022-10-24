@@ -1,11 +1,16 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
 html {
     height: 100%;
     width: 100%;
+
 }
+
 
 body {
     height: 100%;
     width: 100%;
+    font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
 }
 
 #app {

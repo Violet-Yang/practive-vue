@@ -6,8 +6,8 @@
       :key="index"
     >
       <li class="w-100 h-36 bg-white flex gap-3 rounded-t-md p-5">
-        {{ $t(`field.${info.value}`) }}
-        <div>x</div>
+        <span>{{ $t(`field.${info.value}`) }}</span>
+        <div @click="removeTab(info.value)">x</div>
       </li>
     </ul>
   </div>
@@ -17,7 +17,7 @@
 import { computed, inject, reactive } from 'vue'
 
 const store = inject('store')
-// const route = inject('route')
+// const toast = inject('$toast')
 
 const state = reactive({
   // tabInfo: [
@@ -38,6 +38,14 @@ const state = reactive({
 //     },
 //   },
 // })
+
+const removeTab = name => {
+  if (state.tabInfo.length === 1) {
+    window.alert('첫번째 탭은 지울 수 없습니다')
+    return
+  }
+  store.commit('Tab/deleteTab', name)
+}
 </script>
 
 <style scoped></style>

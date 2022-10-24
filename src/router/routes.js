@@ -59,28 +59,22 @@ const routes = [
       },
     ],
   },
+
   {
     path: '/shipping/vehicle',
     name: 'ShippingVehicle',
+    meta: { authRequired: true, title: 'shippingVehicle' },
     component: ShippingVehicle,
-    children: [
-      {
-        path: '/shipping/vehicle',
-        name: 'ShippingVehicle',
-        meta: { authRequired: true, title: 'shippingVehicle' },
-        component: ShippingVehicle,
-      },
-      {
-        path: '/shipping/delivery',
-        name: 'ShippingDelivery',
-        meta: {
-          authRequired: true,
-          allows: 'admin',
-          title: 'shippingDelivery',
-        },
-        component: ShippingDelivery,
-      },
-    ],
+  },
+  {
+    path: '/shipping/delivery',
+    name: 'ShippingDelivery',
+    meta: {
+      authRequired: true,
+      allows: 'admin',
+      title: 'shippingDelivery',
+    },
+    component: ShippingDelivery,
   },
 ]
 

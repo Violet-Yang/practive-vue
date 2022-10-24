@@ -7,6 +7,7 @@ import { AgGridVue } from 'ag-grid-vue3'
 import './styles/index.css'
 import { createI18n } from 'vue-i18n'
 import messages from './locales'
+// import toast from 'vue-toast-notification'
 
 // new Vue({
 //   el: "#app",
@@ -29,7 +30,13 @@ app.component('AgGrid', AgGridVue)
 app.use(store)
 app.use(router)
 app.use(i18)
+// app.use(toast, {
+//   position: 'top-center',
+//   timeout: 2000,
+// })
+
 app.provide(i18, '$t')
+// app.provide(toast, '$toast')
 app.provide(app.route, 'route')
 app.mount('#app')
 // const app = createApp(App);

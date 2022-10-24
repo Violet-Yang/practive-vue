@@ -36,7 +36,7 @@ const state = reactive({
   id: localStorage.getItem('userName'),
   // id: computed(() => store.getters['Auth/userName']),
   lnb: Object.entries(JSON.parse(localStorage.getItem('lnbData'))),
-  lnb2: [],
+  // lnb: store.getters['Lnb/lnbList'],
   lnbList: [
     {
       lnbName: '대시보드',
@@ -145,9 +145,13 @@ const clickTitle = lnbInfo => {
 }
 
 const goPage = (route, label) => {
-  console.log(label, route)
   router.push({ path: route })
   store.commit('Tab/mutateTabList', label)
+  const tabList = store.getters['Tab/tabList']
+
+  if (tabList.length > 10) {
+    store.commit('Tab/deleteTab')
+  }
 }
 
 const logout = () => {
