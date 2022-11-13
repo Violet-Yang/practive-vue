@@ -18,7 +18,7 @@
         </li>
       </ul>
     </div>
-    <div>
+    <div class="text-white">
       <p>{{ state.id }}</p>
       <button @click="logout">로그아웃</button>
     </div>

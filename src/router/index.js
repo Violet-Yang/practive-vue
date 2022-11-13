@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
 import store from '../store/index'
+
 // import Vue from "vue";
 
 // console.log(Vue);
@@ -42,17 +43,29 @@ router.beforeEach((to, from, next) => {
   // }
 
   if (!userName && isAuthenticated) {
+    localStorage.clear()
     next({ name: 'Login' })
   } else {
-    if (to.meta.title) {
-      store.commit('Tab/mutateTabList', to.meta.title)
+    if (!Object.keys(to.meta).length) {
+      console.log('에러페이지 이동')
+      next({ name: 'Error' })
+    } else {
+      if (to.meta.title) {
+        console.log('else===================')
+        next()
+        store.commit('Tab/mutateTabList', to.meta.title)
+      }
     }
   }
+  // else {
+  //   console.log('타이틀존재')
+  //   next({ name: 'Error' })
+  // }
 
   //라우팅 조건
   // 1. 로그인 페이지 : !userName || isAuthenticated
-  // 2. 에러페이지 : userName || !isAuthenticated 이면서 to.meta.title 없을 때
-  // 3. tab세팅 :  userName || !isAuthenticated 이면서 to.meta.title이 존재할 때
+  // 2. 에러페이지 : to.meta.title 없을 때
+  // 3. tab세팅 :  t
 
   // 1. 입고-기준정보까지 라우터 접근은 로컬스토리지(로그인) 정보가 있어야 됨
   //     => 정보는 존재하지만 라우터 정보가 없으면 error페이지로 이동

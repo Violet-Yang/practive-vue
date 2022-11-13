@@ -2,19 +2,25 @@
 
 const Error = () =>
   import(/* webpackChunkName : "Error" */ '../views/ErrorPage')
+
 const Login = () => import(/* webpackChunkName : "Login" */ '../views/Login')
+
 const ReceivingManage = () =>
   import(/* webpackChunkName : "ReceivingManage" */ '../views/receiving/manage')
+
 const ReceivingInspect = () =>
   import(
     /* webpackChunkName : "ReceivingInspect" */ '../views/receiving/inspect'
   )
+
 const ReceivingConfirm = () =>
   import(
     /* webpackChunkName : "ReceivingConfirm" */ '../views/receiving/confirm'
   )
+
 const ShippingVehicle = () =>
   import(/* webpackChunkName : "ShippingVehicle" */ '../views/shipping/vehicle')
+
 const ShippingDelivery = () =>
   import(
     /* webpackChunkName : "ShippingDelivery" */ '../views/shipping/delivery'
@@ -44,20 +50,20 @@ const routes = [
     name: 'ReceivingManage',
     component: ReceivingManage,
     meta: { authRequired: true, title: 'receivingManage' },
-    children: [
-      {
-        path: '/receiving/inspect',
-        name: 'ReceivingInspect',
-        meta: { authRequired: true, title: 'receivingInspect' },
-        component: ReceivingInspect,
-      },
-      {
-        path: '/receiving/confirm',
-        name: 'ReceivingConfirm',
-        meta: { authRequired: true, title: 'receivingConfirm' },
-        component: ReceivingConfirm,
-      },
-    ],
+  },
+
+  {
+    path: '/receiving/inspect',
+    name: 'ReceivingInspect',
+    meta: { authRequired: true, title: 'receivingInspect' },
+    component: ReceivingInspect,
+  },
+
+  {
+    path: '/receiving/confirm',
+    name: 'ReceivingConfirm',
+    meta: { authRequired: true, title: 'receivingConfirm' },
+    component: ReceivingConfirm,
   },
 
   {
